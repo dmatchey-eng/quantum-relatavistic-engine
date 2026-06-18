@@ -20,8 +20,10 @@ jobs:
       - name: Initialize Python Toolchain Environment
         uses: actions/setup-python@v5
         with:
-          python-cache-dependency-path: '**/src/engine/core_math.py'
           python-version: '3.11'
+          cache: 'pip'
+          # Fixed: Removed the 'python-' prefix so GitHub recognizes the parameter
+          cache-dependency-path: '**/src/engine/core_math.py'
 
       - name: Execute Numerical Verification Suite
         run: |
