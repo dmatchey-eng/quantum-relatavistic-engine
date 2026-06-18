@@ -39,6 +39,7 @@ jobs:
 
       - name: Run Core Physics Engine Unit Tests
         run: |
-          # Executes pytest, which will automatically find and run the tests/ directory math assets
-          pytest -v
+          # Changed from 'pytest -v' to use python's explicit module discovery flag
+          python -m pytest -v
+
           
