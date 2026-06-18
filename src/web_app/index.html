@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Relativistic Simulation Dashboard</title>
+    <!-- Cross-Platform Responsive CSS & Graphing Libraries via CDN -->
+    <script src="https://jsdelivr.net"></script>
+    <script src="https://jsdelivr.net"></script>
+    <!-- Pyodide WASM Pipeline Loader Module -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
+
+    <div class="container mx-auto p-6 max-w-7xl">
+        <header class="mb-6 border-b border-slate-800 pb-4">
+            <h1 class="text-2xl font-bold text-teal-400">Quantum Relativistic Simulation Index (QRSI)</h1>
+            <p class="text-sm text-slate-400">WASM-Enabled Cross-Platform Modeling Console</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- INPUT CONTROLS SYSTEM PANEL (LEFT) -->
+            <div class="lg:col-span-1 bg-slate-900 p-5 rounded-xl border border-slate-800 flex flex-col gap-5">
+                <h2 class="text-lg font-semibold text-slate-200 border-b border-slate-800 pb-2">Control Matrix</h2>
+                
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Black Hole Mass (M₀)</label>
+                    <input id="massSlider" type="range" min="0.5" max="5.0" step="0.1" value="2.5" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Proximity Index (r / Rs)</label>
+                    <input id="proxSlider" type="range" min="1.02" max="4.0" step="0.05" value="2.0" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Blind Slicing Freq ($f_b$)</label>
+                    <input id="freqSlider" type="range" min="0.0" max="2.0" step="0.05" value="0.8" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500">
+                </div>
+
+                <div class="border-t border-slate-800 pt-4 flex flex-col gap-2">
+                    <button id="runBtn" class="w-full bg-teal-600 hover:bg-teal-500 text-slate-900 font-bold py-2 px-4 rounded-lg transition" disabled>Loading WASM Environment...</button>
+                    <button id="reverseBtn" class="w-full bg-indigo-700 hover:bg-indigo-600 text-slate-100 font-bold py-2 px-4 rounded-lg transition" disabled>⏪ Play Reverse Log</button>
+                    <button id="exportBtn" class="w-full border border-slate-700 hover:border-slate-500 text-slate-400 font-medium py-1 px-4 rounded-md text-xs mt-2 transition">💾 Export Timeline Matrix (CSV)</button>
+                </div>
+
+                <!-- Live Diagnostics Log Window -->
+                <div class="flex-grow mt-2">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Node Telemetry</label>
+                    <textarea id="telemetryBox" readonly class="w-full h-40 bg-slate-950 border border-slate-800 rounded-lg p-2 font-mono text-xs text-green-400 resize-none">System offline. Standing by for runtime instantiation...</textarea>
+                </div>
+            </div>
+
+            <!-- GRAPHICAL METRICS DISPLAY DASHBOARD (RIGHT) -->
+            <div class="lg:col-span-3 flex flex-col gap-6">
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 h-64">
+                    <canvas id="waveChart"></canvas>
+                </div>
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 h-64">
+                    <canvas id="entropyChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Application Logic Initialization -->
+    <script src="app.js"></script>
+</body>
+</html>
 
