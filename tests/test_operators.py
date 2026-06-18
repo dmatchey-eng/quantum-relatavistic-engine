@@ -4,6 +4,11 @@ Quantum Relativistic Simulation Index (QRSI) - Unit Testing Suite.
 This script executes numerical assertions against core physics operators 
 to validate probability conservation and singularity boundary handling.
 """
+import sys
+import os
+
+# Crucial: Dynamically anchor the exact workspace directory structure to python's lookup path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import numpy as np
 # Direct module import ensures seamless execution inside GitHub Actions
