@@ -4,7 +4,11 @@ import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from src.engine import op_schwarzschild_metric, op_time_dilated_wave
+# Change this line:
+# from src.engine import op_schwarzschild_metric, op_time_dilated_wave
+
+# To this line:
+from src.engine.core_math import op_schwarzschild_metric, op_time_dilated_wave
 
 # Execute an arbitrary test frame verification
 t_space = np.linspace(0, 100, 10)
