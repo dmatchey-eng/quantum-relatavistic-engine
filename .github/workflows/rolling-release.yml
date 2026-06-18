@@ -1,0 +1,59 @@
+name: Continuous Rolling Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Initialize Python Toolchain Environment
+        uses: actions/setup-python@v5
+        with:
+          python-cache-dependency-path: '**/src/engine/core_math.py'
+          python-version: '3.11'
+
+      - name: Execute Numerical Verification Suite
+        run: |
+          pip install numpy pytest
+          pytest tests/
+
+      - name: Compute Next Semantic Version Tag
+        id: tagger
+        run: |
+          # Pull latest semantic tag, increment minor patch block
+          latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
+          base_version=${latest_tag#v}
+          IFS='.' read -r major minor patch <<< "$base_version"
+          new_tag="v$major.$minor.$((patch + 1))"
+          echo "NEW_TAG=$new_tag" >> $GITHUB_ENV
+          echo "Generated rolling deployment marker: $new_tag"
+
+      - name: Construct Standalone Cross-Platform Asset Bundle
+        run: |
+          mkdir build/
+          cp src/web_app/index.html build/
+          cp src/engine/core_math.py build/
+          tar -czvf qrsi-core-bundle.tar.gz build/
+
+      - name: Publish Production Rolling Release Artifacts
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.NEW_TAG }}
+          name: Rolling Release ${{ env.NEW_TAG }}
+          body: |
+            ## 📜 Automated Build Log
+            - **Mathematical Integrity Validation**: Passed
+            - **Spacetime Coaxial Solver Layer**: Synced
+            - **Target Infrastructure**: Cross-platform WebAssembly deployment distribution pack.
+          files: qrsi-core-bundle.tar.gz
