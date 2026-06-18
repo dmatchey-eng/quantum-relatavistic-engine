@@ -18,11 +18,12 @@ jobs:
       - name: Checkout Code Repository
         uses: actions/checkout@v4
 
-      - name: Initialize Python ${{ matrix: 3.11 }} Environment
+      - name: Initialize Python Environment
         uses: actions/setup-python@v5
         with:
+          # This correctly pulls the version from the matrix strategy defined above
           python-version: ${{ matrix.python-version }}
-          cache: 'pip' # Automatically caches dependencies for faster subsequent runs
+          cache: 'pip'
 
       - name: Install Core Dependencies
         run: |
