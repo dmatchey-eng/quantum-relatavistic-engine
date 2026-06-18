@@ -1,4 +1,9 @@
 import numpy as np
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from src.engine import op_schwarzschild_metric, op_time_dilated_wave
 
 # Execute an arbitrary test frame verification
