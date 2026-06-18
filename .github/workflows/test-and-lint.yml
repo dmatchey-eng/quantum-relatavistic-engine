@@ -38,8 +38,8 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
       - name: Run Core Physics Engine Unit Tests
+        env:
+          # Forces the runner to treat the repository root as a source path
+          PYTHONPATH: ${{ github.workspace }}
         run: |
-          # Changed from 'pytest -v' to use python's explicit module discovery flag
-          python -m pytest -v
-
-          
+          pytest -v
