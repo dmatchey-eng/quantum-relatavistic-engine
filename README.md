@@ -16,7 +16,8 @@ quantum-relativistic-engine/
 ├── tests/
 │   └── test_operators.py          # Asserts Born's Rule and Lorentz normalization invariances
 ├── LICENSE                        # Standard open-source boilerplate (e.g., MIT or Apache 2.0)
-└── README.md                      # Unified documentation entry point
+├── README.md                      # Unified documentation entry point
+└── requirements.txt               # Dummy file for dual-workflow inflation
 ```
 
 # Quantum Relativistic Simulation Index (QRSI) Core Engine
